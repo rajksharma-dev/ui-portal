@@ -1,1 +1,1 @@
-# allactivity-planner-public-ui
+app-public-ui
