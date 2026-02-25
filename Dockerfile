@@ -1,0 +1,35 @@
+# Use Node.js for building the React app
+# Stage 1: Build React App
+FROM node:24-alpine as build-stage
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Use ci instead 'install' for Deterministic build and Production best practice
+RUN npm ci
+
+# Copy the rest of the application files
+COPY . .
+
+# Build the application for production
+RUN npm run build
+
+# Use Nginx to serve the built React app
+#FROM nginx:stable-alpine as production-stage
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+
+# Copy the built files to Nginx’s default public directory
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# Optional: Custom Nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80 for the application
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
