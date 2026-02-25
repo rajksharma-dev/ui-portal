@@ -8,7 +8,7 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies use ci instead 'install' for Deterministic build and Production best practice
+# Use ci instead 'install' for Deterministic build and Production best practice
 RUN npm ci
 
 # Copy the rest of the application files
