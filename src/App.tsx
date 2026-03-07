@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
+/* import Login from "./pages/Login"; */
+import AuthForm from "./pages/AuthForm";
 import Users from "./pages/Users";
 import RootRedirect from "./RootRedirect";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -15,7 +16,7 @@ function App() {
           <Route path="/" element={<RootRedirect />} />
 
           {/* Login */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<AuthForm />} />
 
           {/* Protected */}
           <Route
