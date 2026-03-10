@@ -10,7 +10,9 @@ interface Props {
 const ProtectedRoute = ({ children }: Props) => {
   const auth = useContext(AuthContext);
   const location = useLocation();
-
+  if (auth?.loading) {
+    return <div>Loading...</div>;
+  }
   // If no token → go to login
   if (!auth?.token) {
     return (
